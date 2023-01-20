@@ -15,8 +15,11 @@ public class Main {
         int limit = 1500;
         final ShopService shopService = ShopService.getInstance();
         final AnalyticsService analyticsService = AnalyticsService.getInstance();
-
-        shopService.writeToCsvFileData();
+        try {
+            shopService.writeToCsvFileData();
+        } catch (IOException e) {
+        e.printStackTrace();
+    }
 
         try {
             shopService.readFromCsvFileData();

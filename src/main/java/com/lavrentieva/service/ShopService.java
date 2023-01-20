@@ -146,6 +146,7 @@ public class ShopService {
                 priceRepository.save(recordPriceList);
             }
         }
+        reader.close();
     }
 
     private void readFromResources() throws FileNotFoundException {
@@ -170,8 +171,11 @@ public class ShopService {
         return false;
     }
 
-    public void writeToCsvFileData() {
+    public void writeToCsvFileData() throws IOException, NullPointerException{
         final File file = new File("src/main/resources", "priceList.csv");
+        if (!file.exists()){
+            file.createNewFile();
+        }
         try (FileWriter priceListWriter = new FileWriter(file)) {
             priceListWriter.write(convertHeadToCsv());
             Iterator<String> i = createDataForCsvFile().iterator();
