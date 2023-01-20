@@ -20,8 +20,7 @@ public class ShopService {
     private static ShopService instance;
     private final PriceListRepository priceRepository = new PriceListRepository();
     private final ShopRepository shopRepository;
-    private final PersonService personService = new PersonService();
-    private List<String[]> dataForCsvFile = new ArrayList<>();
+    private final List<String[]> dataForCsvFile = new ArrayList<>();
     private final List<Map<String, String>> priceList = priceRepository.getPriceList();
     private BufferedReader reader;
     private final Random random = new Random();

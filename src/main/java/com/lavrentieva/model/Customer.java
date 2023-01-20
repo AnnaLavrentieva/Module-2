@@ -4,10 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.UUID;
+
 @Setter
 @Getter
 public class Customer {
-    private final String id;
+    private String id;
     private String email;
     private int age;
 

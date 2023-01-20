@@ -13,7 +13,6 @@ public class Main {
 
     public static void main(String[] args) {
         int limit = 1500;
-//        Integer.parseInt(args[0]);
         final ShopService shopService = ShopService.getInstance();
         final AnalyticsService analyticsService = AnalyticsService.getInstance();
 
@@ -27,10 +26,11 @@ public class Main {
 
         Invoice invoice = shopService.createInvoice(limit);
         System.out.println(invoice);
+        System.out.println();
 
         shopService.createInvoiceFromAmount(14, limit);
-
         shopService.printAllInvoices();
+        System.out.println();
 
         final Map<ElectronicsType, Long> amountOfInvoicesByElectronicsTypes =
                 analyticsService.amountOfInvoicesByElectronicsTypes();
@@ -50,11 +50,6 @@ public class Main {
         System.out.println(firstThreeInvoicesByDate);
         System.out.println();
 
-        List<Invoice> infoInvoicesByCustomerYounger18 =
-                analyticsService.infoInvoicesByCustomerYounger18();
-        System.out.println(infoInvoicesByCustomerYounger18);
-        System.out.println();
-
         List<Invoice> sortTreeTimes = analyticsService.sortTreeTimes();
         System.out.println(sortTreeTimes);
         System.out.println();
@@ -67,6 +62,9 @@ public class Main {
         System.out.println(oneType);
         System.out.println();
 
-
+        List<Invoice> infoInvoicesByCustomerYounger18 =
+                analyticsService.infoInvoicesByCustomerYounger18();
+        System.out.println(infoInvoicesByCustomerYounger18);
+        System.out.println();
     }
 }

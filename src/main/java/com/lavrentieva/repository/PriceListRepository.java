@@ -1,6 +1,5 @@
 package com.lavrentieva.repository;
 
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +15,7 @@ public class PriceListRepository {
         priceList.add(goods);
     }
 
-    public List<Map<String, String>> getPriceList(){
+    public List<Map<String, String>> getPriceList() {
         return priceList;
     }
-
 }

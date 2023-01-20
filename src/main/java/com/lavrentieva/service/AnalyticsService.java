@@ -65,7 +65,7 @@ public class AnalyticsService {
     }
 
     public List<Invoice> firstThreeInvoicesByDate() {
-        List<Invoice> invoices = shopRepository.getInvoices()
+        final List<Invoice> invoices = shopRepository.getInvoices()
                 .stream()
                 .filter(Objects::nonNull)
                 .sorted(Comparator.comparing(Invoice::getDate))
@@ -73,16 +73,6 @@ public class AnalyticsService {
                 .limit(3)
                 .collect(Collectors.toList());
         return invoices;
-    }
-
-    public List<Invoice> infoInvoicesByCustomerYounger18() {
-        List<Invoice> infoFromInvoices = shopRepository.getInvoices()
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(invoice -> invoice.getCustomer().getAge() < 18)
-                .peek(invoice -> invoice.setInvoiceType("LOW_AGE"))
-                .collect(Collectors.toList());
-        return infoFromInvoices;
     }
 
     public List<Invoice> sortTreeTimes() {
@@ -106,10 +96,9 @@ public class AnalyticsService {
             i1.getListOfGoods().stream().mapToInt(Electronics::getPrice).sum(),
             i2.getListOfGoods().stream().mapToInt(Electronics::getPrice).sum());
 
-
     public Invoice sumOfSmallestInvoice() {
         Invoice invoice = null;
-        Optional<Invoice> mapSum = shopRepository.getInvoices()
+        final Optional<Invoice> mapSum = shopRepository.getInvoices()
                 .stream()
                 .filter(Objects::nonNull)
                 .collect(Collectors.minBy(goodsSumComparator));
@@ -120,7 +109,6 @@ public class AnalyticsService {
         return invoice;
     }
 
-    //    Чеки, які містять тільки один тип товару
     public List<Invoice> invoicesWithOneElectronicsType() {
         final List<Invoice> withOneType = shopRepository.getInvoices()
                 .stream()
@@ -137,7 +125,7 @@ public class AnalyticsService {
             return true;
         }
         for (int i = 0; i < withOneType.size() - 1; i++) {
-            if (withOneType.get(i).getType().equals(withOneType.get(i+1).getType())) {
+            if (withOneType.get(i).getType().equals(withOneType.get(i + 1).getType())) {
                 result = true;
             } else {
                 result = false;
@@ -147,6 +135,15 @@ public class AnalyticsService {
         return result;
     }
 
+    public List<Invoice> infoInvoicesByCustomerYounger18() {
+        final List<Invoice> infoFromInvoices = shopRepository.getInvoices()
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(invoice -> invoice.getCustomer().getAge() < 18)
+                .peek(invoice -> invoice.setInvoiceType("LOW_AGE"))
+                .collect(Collectors.toList());
+        return infoFromInvoices;
+    }
 }
 
 
